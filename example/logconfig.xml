@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RibbonLogging>
+    <appender name="console" type="console" />
+    <appender name="file" type="file">
+        <fileName>./sample.log</fileName>
+    </appender>
+
+    <logger name="all">
+    	<appenderRef>console</appenderRef>
+    	<appenderRef>file</appenderRef>
+    </logger>
+
+    <logger name="console">
+    	<appenderRef>console</appenderRef>
+    </logger>
+</RibbonLogging>
