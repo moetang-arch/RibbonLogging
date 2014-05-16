@@ -31,19 +31,19 @@ type consoleAppender struct {
 func (appender *consoleAppender) Println(logger *loggerImpl, level Level, logString string) {
 	switch level {
 	case TRACE:
-		fmt.Println(appender.traceColor, default_TimeString(), loggerInfo(logger), logString)
+		fmt.Println(appender.traceColor, default_TimeString(), loggerInfo(logger), "-", logString)
 	case DEBUG:
-		fmt.Println(appender.debugColor, default_TimeString(), loggerInfo(logger), logString)
+		fmt.Println(appender.debugColor, default_TimeString(), loggerInfo(logger), "-", logString)
 	case INFO:
-		fmt.Println(appender.infoColor, default_TimeString(), loggerInfo(logger), logString)
+		fmt.Println(appender.infoColor, default_TimeString(), loggerInfo(logger), "-", logString)
 	case WARN:
-		fmt.Println(appender.warnColor, default_TimeString(), loggerInfo(logger), logString)
+		fmt.Println(appender.warnColor, default_TimeString(), loggerInfo(logger), "-", logString)
 	case ERROR:
-		fmt.Println(appender.errorColor, default_TimeString(), loggerInfo(logger), logString)
+		fmt.Println(appender.errorColor, default_TimeString(), loggerInfo(logger), "-", logString)
 	case FATAL:
-		fmt.Println(appender.fatalColor, default_TimeString(), loggerInfo(logger), logString)
+		fmt.Println(appender.fatalColor, default_TimeString(), loggerInfo(logger), "-", logString)
 	case PANIC:
-		fmt.Println(appender.panicColor, default_TimeString(), loggerInfo(logger), logString)
+		fmt.Println(appender.panicColor, default_TimeString(), loggerInfo(logger), "-", logString)
 	}
 }
 
