@@ -17,16 +17,6 @@ var (
 		fatalColor: "\x1b[33;41m[FATAL]\x1b[0m",
 		panicColor: "\x1b[37;41;5m[PANIC]\x1b[0m",
 	}
-	defaultLogger = &loggerImpl{
-		loggerName: "default",
-		level:      TRACE,
-		stackTrace: true,
-		appender: []appender{
-			&consoleAppender{
-				baseAppender: defaultBaseAppender,
-			},
-		},
-	}
 )
 
 type loggerImpl struct {
