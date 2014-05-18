@@ -11,7 +11,7 @@ func Test_Logger(t *testing.T) {
 	//%contextName [%t] %d
 	//properties - ${USER_HOME} , etc.
 	logFab := CreateLogFactory()
-	logFab.CreateLoggerWithDefaultConfig("theTestLogger")
+	logFab.CreateLoggerWithDefaultConfig("theTestLogger", DEBUG, false)
 	logger := logFab.GetLogger("hello")
 	fmt.Println(fmt.Sprint("hello"))
 	logger.Trace("trace")
@@ -24,4 +24,5 @@ func Test_Logger(t *testing.T) {
 
 	logger2 := logFab.GetLogger("theTestLogger")
 	logger2.Trace("trace")
+	logger2.Debug("debug")
 }

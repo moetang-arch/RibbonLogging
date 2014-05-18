@@ -48,10 +48,14 @@ func (appender *consoleAppender) Println(logger *loggerImpl, level Level, logStr
 }
 
 func loggerInfo(logger *loggerImpl) string {
-	_, filePath, line, ok := runtime.Caller(4)
-	if logger.stackTrace && ok {
-		_, file := filepath.Split(filePath)
-		return fmt.Sprintf("[%s:%s:%d]", logger.loggerName, file, line)
+	if logger.stackTrace {
+		_, filePath, line, ok := runtime.Caller(4)
+		if ok {
+			_, file := filepath.Split(filePath)
+			return fmt.Sprintf("[%s:%s:%d]", logger.loggerName, file, line)
+		} else {
+			return fmt.Sprintf("[%s]", logger.loggerName)
+		}
 	} else {
 		return fmt.Sprintf("[%s]", logger.loggerName)
 	}

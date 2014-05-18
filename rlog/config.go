@@ -51,17 +51,17 @@ func (logFactory *LogFactory) GetLogger(name string) (logger Logger) {
 	logFactory.loggerMutex.RLock()
 	defer logFactory.loggerMutex.RUnlock()
 
-	logger = logFactory.CreateLoggerWithDefaultConfig(name)
+	logger = logFactory.CreateLoggerWithDefaultConfig(name, TRACE, true)
 	return
 }
 
-func (logFactory *LogFactory) CreateLoggerWithDefaultConfig(name string) (logger Logger) {
+func (logFactory *LogFactory) CreateLoggerWithDefaultConfig(name string, level Level, printStackTrace bool) (logger Logger) {
 	logger, ok := logFactory.loggerMap[name]
 	if !ok {
 		logger = &loggerImpl{
 			loggerName: name,
-			level:      TRACE,
-			stackTrace: true,
+			level:      level,
+			stackTrace: printStackTrace,
 			appender: []appender{
 				&consoleAppender{
 					baseAppender: defaultBaseAppender,
