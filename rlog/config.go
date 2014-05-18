@@ -1,9 +1,10 @@
 package rlog
 
 import (
-// "encoding/xml"
-// "fmt"
-// "io/ioutil"
+	// "encoding/xml"
+	// "fmt"
+	// "io/ioutil"
+	"sync"
 )
 
 var (
@@ -36,14 +37,39 @@ type loggerImpl struct {
 }
 
 type LogFactory struct {
+	loggerMap   map[string]Logger
+	loggerMutex sync.RWMutex
 }
 
 func CreateLogFactory() *LogFactory {
-	return &LogFactory{}
+	return &LogFactory{
+		loggerMap: make(map[string]Logger),
+	}
 }
 
 func (logFactory *LogFactory) GetLogger(name string) (logger Logger) {
-	logger = defaultLogger
+	logFactory.loggerMutex.RLock()
+	defer logFactory.loggerMutex.RUnlock()
+
+	logger = logFactory.CreateLoggerWithDefaultConfig(name)
+	return
+}
+
+func (logFactory *LogFactory) CreateLoggerWithDefaultConfig(name string) (logger Logger) {
+	logger, ok := logFactory.loggerMap[name]
+	if !ok {
+		logger = &loggerImpl{
+			loggerName: name,
+			level:      TRACE,
+			stackTrace: true,
+			appender: []appender{
+				&consoleAppender{
+					baseAppender: defaultBaseAppender,
+				},
+			},
+		}
+		logFactory.loggerMap[name] = logger
+	}
 	return
 }
 
