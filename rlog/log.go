@@ -62,44 +62,72 @@ func (logger *loggerImpl) IsPanicEnabled() bool {
 }
 
 func (logger *loggerImpl) Trace(format string, args ...interface{}) {
-	formatf(logger, TRACE, format, args)
+	if logger.IsTraceEnabled() {
+		formatf(logger, TRACE, format, args)
+	}
 }
 func (logger *loggerImpl) TraceAll(args ...interface{}) {
-	formatAll(logger, TRACE, args)
+	if logger.IsTraceEnabled() {
+		formatAll(logger, TRACE, args)
+	}
 }
 func (logger *loggerImpl) Debug(format string, args ...interface{}) {
-	formatf(logger, DEBUG, format, args)
+	if logger.IsDebugEnabled() {
+		formatf(logger, DEBUG, format, args)
+	}
 }
 func (logger *loggerImpl) DebugAll(args ...interface{}) {
-	formatAll(logger, DEBUG, args)
+	if logger.IsDebugEnabled() {
+		formatAll(logger, DEBUG, args)
+	}
 }
 func (logger *loggerImpl) Info(format string, args ...interface{}) {
-	formatf(logger, INFO, format, args)
+	if logger.IsInfoEnabled() {
+		formatf(logger, INFO, format, args)
+	}
 }
 func (logger *loggerImpl) InfoAll(args ...interface{}) {
-	formatAll(logger, INFO, args)
+	if logger.IsInfoEnabled() {
+		formatAll(logger, INFO, args)
+	}
 }
 func (logger *loggerImpl) Warn(format string, args ...interface{}) {
-	formatf(logger, WARN, format, args)
+	if logger.IsWarnEnabled() {
+		formatf(logger, WARN, format, args)
+	}
 }
 func (logger *loggerImpl) WarnAll(args ...interface{}) {
-	formatAll(logger, WARN, args)
+	if logger.IsWarnEnabled() {
+		formatAll(logger, WARN, args)
+	}
 }
 func (logger *loggerImpl) Error(format string, args ...interface{}) {
-	formatf(logger, ERROR, format, args)
+	if logger.IsErrorEnabled() {
+		formatf(logger, ERROR, format, args)
+	}
 }
 func (logger *loggerImpl) ErrorAll(args ...interface{}) {
-	formatAll(logger, ERROR, args)
+	if logger.IsErrorEnabled() {
+		formatAll(logger, ERROR, args)
+	}
 }
 func (logger *loggerImpl) Fatal(format string, args ...interface{}) {
-	formatf(logger, FATAL, format, args)
+	if logger.IsFatalEnabled() {
+		formatf(logger, FATAL, format, args)
+	}
 }
 func (logger *loggerImpl) FatalAll(args ...interface{}) {
-	formatAll(logger, FATAL, args)
+	if logger.IsFatalEnabled() {
+		formatAll(logger, FATAL, args)
+	}
 }
 func (logger *loggerImpl) Panic(format string, args ...interface{}) {
-	formatf(logger, PANIC, format, args)
+	if logger.IsPanicEnabled() {
+		formatf(logger, PANIC, format, args)
+	}
 }
 func (logger *loggerImpl) PanicAll(args ...interface{}) {
-	formatAll(logger, PANIC, args)
+	if logger.IsPanicEnabled() {
+		formatAll(logger, PANIC, args)
+	}
 }
